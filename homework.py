@@ -1,4 +1,5 @@
 from dataclasses import dataclass
+from typing import List
 
 
 @dataclass
@@ -148,7 +149,7 @@ TYPE_TRAININGS = {'SWM': Swimming,
                   }
 
 
-def read_package(workout_type: str, data: list[int]) -> Training:
+def read_package(workout_type: str, data: List[int]) -> Training:
     """Прочитать данные полученные от датчиков."""
     if workout_type not in TYPE_TRAININGS:
         raise KeyError('Нет такого типа тренировок!')
