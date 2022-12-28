@@ -11,7 +11,7 @@ class InfoMessage:
     speed: float
     calories: float
 
-    message: str = (
+    MESSAGE: str = (
         'Тип тренировки: {training_type}; '
         'Длительность: {duration:.3f} ч.; '
         'Дистанция: {distance:.3f} км; '
@@ -22,7 +22,7 @@ class InfoMessage:
     def get_message(self) -> str:
         """Печать статистики о тренировке."""
 
-        return self.message.format(
+        return self.MESSAGE.format(
             training_type=self.training_type,
             duration=self.duration,
             distance=self.distance,
@@ -143,16 +143,16 @@ class Swimming(Training):
                 * self.weight * self.duration)
 
 
-TYPE_TRAININGS = {'SWM': Swimming,
-                  'RUN': Running,
-                  'WLK': SportsWalking
-                  }
+TYPE_TRAININGS: dict[str, type[Training]] = {'SWM': Swimming,
+                                             'RUN': Running,
+                                             'WLK': SportsWalking
+                                             }
 
 
 def read_package(workout_type: str, data: List[int]) -> Training:
     """Прочитать данные полученные от датчиков."""
     if workout_type not in TYPE_TRAININGS:
-        raise KeyError('Нет такого типа тренировок!')
+        raise KeyError(f'Нет такого типа тренировок : {workout_type}.')
     return TYPE_TRAININGS[workout_type](*data)
 
 
